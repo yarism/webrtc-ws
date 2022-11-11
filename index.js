@@ -13,7 +13,7 @@ wss.on('connection', (ws) => {
         console.log("%s: ", message);
         wss.clients.forEach(client => {
             if (client !== ws && client.readyState === websocket.OPEN) {
-                client.send(JSON.stringify(message.utf8));
+                client.send(JSON.stringify(message));
             }
         });
     });
