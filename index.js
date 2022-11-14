@@ -9,7 +9,8 @@ const wss = new websocket.WebSocketServer({ server });
 
 wss.on('connection', (ws) => {
     console.log("connection opened");
-    ws.on('message', (message) => {
+    ws.on('message', (data, isBinary) => {
+        const message = isBinary ? data : data.toString();
         console.log("%s: ", message);
         wss.clients.forEach(client => {
             if (client !== ws && client.readyState === websocket.OPEN) {
